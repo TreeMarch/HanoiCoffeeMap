@@ -50,11 +50,11 @@ const getCafeById = async (req, res) => {
 
 // ===============================================
 //POST
-const createCafe = async () => {
+const createCafe = async (req,res) => {
     try{
          const { owner_id, name, slug, description, address, district, latitude, longitude, phone, website, open_time, close_time, price_min, price_max, wifi, has_parking } = req.body 
 
-         const cafe = await cafeService.createCafe({
+         const cafe = await cafeService.createSluCafe({
              owner_id, name, slug, description, address, district, latitude, longitude, phone, website, open_time, close_time, price_min, price_max, wifi, has_parking 
          })
 

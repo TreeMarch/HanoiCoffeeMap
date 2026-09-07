@@ -12,11 +12,11 @@ const validateCreateCafe = [
     (req,res, next) => {
         const error = validationResult(req);
     
-        if(!error.notEmpty()){
+        if(!error.isEmpty()){
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: error.array()[0].msg,
-                errors: error.array.map(err => ({
+                errors: error.array().map(err => ({
                     field: err.path,
                     message: err.msg
                 }))
@@ -38,11 +38,11 @@ const validateUpdateCafe = [
     (req,res, next) => {
         const error = validationResult(req);
     
-        if(!error.notEmpty()){
+        if(!error.isEmpty()){
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: error.array()[0].msg,
-                errors: error.array.map(err => ({
+                errors: error.array().map(err => ({
                     field: err.path,
                     message: err.msg
                 }))

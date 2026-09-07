@@ -3,6 +3,29 @@ const {generateSlug} = require("../utils/slug")
 
 
 const cafeService = {
+
+    async createCafe(data){
+        const {
+        owner_id,
+        name,
+        slug,
+        description,
+        address,
+        district,
+        latitude,
+        longitude,
+        phone,
+        website,
+        open_time,
+        close_time,
+        price_min,
+        price_max,
+        wifi,
+        has_parking
+    } = data;
+    return CafeModel.createCafe(owner_id, name, slug, description, address, district, phone, website, latitude, longitude, open_time, close_time, price_min, price_max, wifi, has_parking)
+    },
+
     //tao slug tu ten cua quan cafe
     async generateUniqueSlug(name,excludeId = null) {
         const baseSlug = generateSlug(name)
@@ -17,7 +40,7 @@ const cafeService = {
     },
 
     // tao quan - service gan slug truoc khi goi model 
-    async createCafe(data){
+    async createSluCafe(data){
         const slug = await cafeService.generateUniqueSlug(data.name)
         return CafeModel.createCafe({...data,slug})
     },

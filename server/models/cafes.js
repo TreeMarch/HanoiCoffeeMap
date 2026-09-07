@@ -81,13 +81,13 @@ const CafeModel = {
 
 
     // them quan moi 
-    async createCafe(owner_id, name, slug, description, address, district, phone, website, latitude, longitude, open_time,close_time,price_min, price_max, wifi, has_parking, approval_status,operating_status) {
+    async createCafe({owner_id, name, slug, description, address, district, phone, website, latitude, longitude, open_time,close_time,price_min, price_max, wifi, has_parking, approval_status,operating_status}) {
         const query = `insert into cafes (owner_id, name, slug, description, address, district, phone, website, latitude, longitude, open_time, close_time, price_min, price_max, wifi, has_parking, approval_status, operating_status)
         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
         returning *`;
 
         //set gia tri mac dinh cho cac truong khong bat buoc
-        const values = [owner_id || null, name, slug, description || null, address, district, phone || null, website || null, latitude, longitude, open_time || null, close_time || null, price_min || null, price_max || null, wifi, has_parking ?? false, approval_status || "PENDING", operating_status || "ACTIVE"];
+        const values = [owner_id || null, name, slug, description ?? null, address, district, phone || null, website ?? null, latitude, longitude, open_time || null, close_time || null, price_min ?? null, price_max ?? null, wifi, has_parking ?? false, approval_status || "PENDING", operating_status || "open"];
 
         const result = await pool.query(query, values);
         return result.rows[0];

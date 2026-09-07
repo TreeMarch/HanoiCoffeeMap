@@ -6,7 +6,7 @@ const { validateCreateCafe,validateUpdateCafe } = require("../middleware/cafeVal
 
 router.get("/", getCafes);
 router.post("/", validateCreateCafe,createCafe)
-router.patch('/:id', validateUpdateCafe, updateCafe)
+router.put('/:id', validateUpdateCafe, updateCafe)
 router.delete('/:id', deleteCafe)
 
 module.exports = router;
