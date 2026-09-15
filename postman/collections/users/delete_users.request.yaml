@@ -1,4 +1,0 @@
-$kind: http-request
-url: "{{baseUrl}}/admin/user/245cffa8-db13-440a-98ff-02c0948690bc"
-method: DELETE
-order: 3036398743310369

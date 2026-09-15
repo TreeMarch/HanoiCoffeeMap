@@ -1,0 +1,60 @@
+# Postman (Lịch sử test, biến & thư mục)
+.postman/
+postman/
+postman_history/
+*.postman_environment.json
+*postman_globals.json
+
+# Server (Node.js & PostgreSQL)
+# Thư viện cài đặt
+server/node_modules/
+node_modules/
+
+# Biến môi trường & Dữ liệu nhạy cảm
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+server/.env*
+
+# Logs & Debugging
+*.log
+server/logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# User Uploads (Nếu server có tính năng lưu ảnh upload của quán cafe)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Client (React App)
+client/node_modules/
+client/build/
+client/dist/
+client/.env*.local
+
+# Cache của các công cụ build Frontend (Vite, Next.js, Parcel...)
+client/.vite/
+client/.next/
+client/.cache/
+
+# Testing coverage (Nếu có chạy test ở React)
+client/coverage/
+
+Trình chỉnh sửa code & Hệ điều hành (IDE & OS)
+# VS Code / WebStorm
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.code-workspace
+
+# File rác hệ điều hành (macOS / Windows)
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db

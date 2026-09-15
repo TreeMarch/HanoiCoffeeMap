@@ -1,5 +1,0 @@
-$kind: http-request
-description: ""
-url: http://localhost:5000/admin/cafes/5ea80ee5-83a3-46aa-b674-15bafb578b8b
-method: DELETE
-order: 4457042455269685

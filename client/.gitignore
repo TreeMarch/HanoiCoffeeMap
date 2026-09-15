@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+/bower_components
 dist
 dist-ssr
 *.local
@@ -23,5 +24,20 @@ dist-ssr
 *.sln
 *.sw?
 
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
 .env
 .postman
+
+.postman/
+postman_history/
+*.postman_environment.json
+*postman_globals.json
+
+/uploads/*
+!/uploads/.gitkeep
