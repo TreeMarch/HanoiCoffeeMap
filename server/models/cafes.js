@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+import pool from '../config/db.js';
 
 const CafeModel = {
     // lay tat ca cac quan cafe 
@@ -137,4 +137,4 @@ const CafeModel = {
 
 }
 
-module.exports = CafeModel;
+export default CafeModel;

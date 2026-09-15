@@ -1,57 +1,38 @@
-const cafeModel = require('../models/cafes');
-const cafeService = require('../services/cafes')
+import cafeModel from '../models/cafes.js';
+import cafeService from '../services/cafes.js'
+import AppError from "../utils/Errors/AppError.js";
+import catchAsync from "../utils/Errors/catchAsync.js";
 
 
 
 //GET
 // ===============================================
-const getCafes = async (req, res) => {
-    try{
+export const getCafes = catchAsync(async (req, res) => {
         const { page, limit } = req.query;
         const result = await cafeModel.findAllCafes({ page, limit });
         res.json({
             success: true,
-            message: 'Get all cafes successfully',
+            message: 'Lấy danh sách quán các quán cafe thành công',
             ...result,
-        })
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            success: false,
-            message: 'Server error'
-        })
-    }
-}
+        })    
+});
 
 
-const getCafeById = async (req, res) => {
-    try{
+export const getCafeById = catchAsync(async (req, res) => {
         const result = await cafeModel.findCafeById(req.params.id);
         if(!result){
-            return res.status(404).json({
-                success: false,
-                message: 'Cafe spot not found !'
-            })
+            return next(new AppError("Không tìm thấy quán cafe",404))
         }
         res.json({
             success: true,
             message: 'Cafe spot found successfully',
             data: result
         })
-    }
-    catch(err){
-        console.error('getCafeById error',err);
-        res.status(500).json({
-            success: false,
-            message : 'Server error'
-        })
-    }
-}
+});
 
 // ===============================================
 //POST
-const createCafe = async (req,res) => {
-    try{
+export const createCafe = catchAsync(async (req,res) => {
          const { owner_id, name, slug, description, address, district, latitude, longitude, phone, website, open_time, close_time, price_min, price_max, wifi, has_parking } = req.body 
 
          const cafe = await cafeService.createSluCafe({
@@ -63,46 +44,25 @@ const createCafe = async (req,res) => {
             message: `Thêm quán cafe thành công`,
             data: cafe
          })
-    }catch(err){
-        console.error("error createCafe function (controller)",err)
-        return res.status(500).json({
-            success: false,
-            message: "Server error"
-        })
-    }
-}
+});
 // ===============================================
 //PUT
-const updateCafe = async (req,res) =>{
-    try{
+export const updateCafe = catchAsync(async (req,res) =>{
         const { id } = req.params;
         const cafe = await cafeService.updateCafe(id, req.body);
 
         if(!cafe) {
-            return res.status(404).json({
-                success: false,
-                message: "Không tìm thấy quán cafe"
-            });
+            return next(new AppError("Không tìm thấy quán cafe",404))
         }
         return res.status(200).json({
             success: true,
             message: `Cập nhật thông tin quán "${cafe.name}" thành công`,
             data: cafe
         })
-
-
-    }catch(err){
-        console.error("error updateCafe function (controller)",err)
-        return res.status(500).json({
-            success: false,
-            message: "Server error"
-        })
-    }
-}
+});
 // ===============================================
 //DELETE
-const deleteCafe = async (req,res) => {
-    try{
+export const deleteCafe = catchAsync(async (req,res) => {
         const {id} = req.params;
         const cafe = await cafeModel.deleteCafe(id);
 
@@ -111,16 +71,8 @@ const deleteCafe = async (req,res) => {
             message: "Xóa quán cafe thành công",
             data: cafe
         });
-    } catch(err){
-        console.error("error deleteCafe function (controller)",err)
-        return res.status(500).json({
-            success: false,
-            message: "Server error"
-        })
-    }
-}
+});
 // ===============================================
 
 
-
-module.exports = { getCafes, getCafeById,createCafe,updateCafe, deleteCafe }
+export default { getCafes, getCafeById,createCafe,updateCafe, deleteCafe }

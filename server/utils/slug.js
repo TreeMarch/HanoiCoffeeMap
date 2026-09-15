@@ -1,7 +1,4 @@
-/**
- * Chuyển tên tiếng Việt thành slug
- * VD: "Cộng Cà Phê Tràng Tiền" → "cong-ca-phe-trang-tien"
- */
+// Chuyển tên tiếng Việt thành slug
 const generateSlug = (text) => {
   return text
     .normalize('NFD')                          // tách dấu ra khỏi chữ
@@ -14,4 +11,4 @@ const generateSlug = (text) => {
     .replace(/-+/g, '-')                       // nhiều gạch ngang → 1 gạch ngang
 }
 
-module.exports = { generateSlug }
+export default { generateSlug }

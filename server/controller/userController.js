@@ -1,7 +1,8 @@
-const UserModel = require('../models/users');
+import UserModel from '../models/users.js';
+import AppError from "../utils/Errors/AppError.js";
+import catchAsync from "../utils/Errors/catchAsync.js";
 
-const getUsers = async(req, res) => {
-    try{
+export const getUsers = catchAsync (async(req, res) => {
         const { page, limit } = req.query;
         const result = await UserModel.findAllUsers({ page, limit });
         res.json({
@@ -9,17 +10,9 @@ const getUsers = async(req, res) => {
             message: 'Get all users successfully',
             ...result,
         })
-    }catch(err){
-        console.log(err);
-        res.status(500).json({
-            success: false,
-            message: 'Server error'
-        })
-    }
-}
+});
 
-const createUser = async(req,res) => {
-    try{
+export const createUser = catchAsync(async(req,res) => {
         const {email, password_hash,full_name, phone, avatar_url, role, is_active} = req.body;
         const user = await UserModel.createUser({email, password_hash,full_name, phone, avatar_url, role, is_active});
         res.status(201).json({
@@ -27,61 +20,32 @@ const createUser = async(req,res) => {
             message: 'User created successfully',
             data: user
         })
-    }catch(err){
-        console.error('createUser error (controller)',err);
-        res.status(500).json({
-            success: false,
-            message : 'Server error'
-        })
-    }
-}
+});
 
-const updateUser = async(req,res) => {
-    try{
+export const updateUser =catchAsync (async(req,res) => {
         const {email, password_hash,full_name, phone, avatar_url, role, is_active} = req.body;
         const user = await UserModel.updateUser(req.params.id, {email, password_hash,full_name, phone, avatar_url, role, is_active});
         if(!user){
-            return res.status(404).json({
-                success: false,
-                message: 'User not found'
-            })
+            return next(new AppError("Không tìm thấy người dùng",404))
         }
         res.status(200).json({
             success: true,
             message: `updated ${user.full_name} successfully`,
             data: user
         })
-    }catch(err){
-        console.error('updateUser error (controller)',err);
-        res.status(500).json({
-            success: false,
-            message : 'Server error'
-        })
-    }
-}
+});
 
-const deleteUser = async(req,res) => {
-    try{
+export const deleteUser = catchAsync(async(req,res) => {
         const user = await UserModel.deleteUser(req.params.id);
         if(!user){
-            return res.status(404).json({
-                success: false,
-                message: 'User not found'
-            })
+            return next(new AppError("Không tìm thấy người dùng",404))
         }
         res.status(200).json({
             success: true,
             message: `deleted ${user.full_name} successfully`,
             data: user
         })
-    }catch(err){
-        console.error('deleteUser error (controller)',err);
-        res.status(500).json({
-            success: false,
-            message : 'Server error'
-        })
-    }
-}
+});
 
 
-module.exports = { getUsers,createUser, updateUser, deleteUser }
+export default { getUsers,createUser, updateUser, deleteUser }

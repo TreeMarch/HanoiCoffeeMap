@@ -1,12 +1,18 @@
-const express = require("express");
+import express from "express";
+
+
+import cafeController, { getCafes, getCafeById ,createCafe , updateCafe, deleteCafe } from "../controller/cafeController.js";
+import { validateCreateCafe,validateUpdateCafe } from "../middleware/cafeValidator.js";
+import authenticate from "../middleware/authenticate.js";
+import authorize from "../middleware/authorize.js";
+
 const router = express.Router();
 
-const { getCafes,getCafeById,createCafe, updateCafe, deleteCafe } = require("../controller/cafeController");
-const { validateCreateCafe,validateUpdateCafe } = require("../middleware/cafeValidation")
 
-router.get("/", getCafes);
-router.post("/", validateCreateCafe,createCafe)
-router.put('/:id', validateUpdateCafe, updateCafe)
+router.get("/", getCafes); // public
+router.post("/",validateCreateCafe,createCafe) 
+router.put('/:id',validateUpdateCafe, updateCafe)
 router.delete('/:id', deleteCafe)
+// router.patch('/:id/approve',authenticate,authorize('admin'),cafeController.approveCafe)
 
-module.exports = router;
+export default router;

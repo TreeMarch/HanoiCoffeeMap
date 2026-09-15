@@ -1,0 +1,11 @@
+$kind: http-request
+url: http://localhost:5000/admin/cafes/05467366-137c-456a-a4dc-17447fb324de
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \    \"website\" : \"https://www.facebook.com/profile.php?id=100052640085742&locale=vi_VN\"\r
+
+    }"
+order: 3806379910951772

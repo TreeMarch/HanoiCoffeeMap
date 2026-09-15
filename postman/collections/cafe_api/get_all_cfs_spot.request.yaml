@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:5000/admin/cafes
+method: GET
+order: 1788771887431

@@ -1,5 +1,5 @@
-const CafeModel = require("../models/cafes")
-const {generateSlug} = require("../utils/slug")
+import CafeModel from "../models/cafes.js"
+import generateSlug from "../utils/slug.js";
 
 
 const cafeService = {
@@ -63,4 +63,4 @@ const cafeService = {
 
 }
 
-module.exports = cafeService
+export default cafeService;

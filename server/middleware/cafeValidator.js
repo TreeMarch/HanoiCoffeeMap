@@ -1,6 +1,6 @@
-const {body, validationResult} = require('express-validator');
+import {body, validationResult} from 'express-validator';
 
-const validateCreateCafe = [
+export const validateCreateCafe = [
     body('name').trim().notEmpty().withMessage("Tên quán không được để trống"),
     body('address').trim().notEmpty().withMessage("Địa chỉ quán không được để trống"),
     body('price_min').optional().isFloat({min : 0}).withMessage("Giá tối thiểu không được là số âm"),
@@ -26,7 +26,7 @@ const validateCreateCafe = [
     }
 ]
 
-const validateUpdateCafe = [
+export const validateUpdateCafe = [
     body('name').optional().trim().notEmpty().withMessage("Tên quán không được để trống"),
     body('address').optional().trim().notEmpty().withMessage("Địa chỉ quán không được để trống"),
     body('price_min').optional().isFloat({min : 0}).withMessage("Giá tối thiểu không được là số âm"),
@@ -51,4 +51,4 @@ const validateUpdateCafe = [
         next();
     }
 ]
-module.exports = { validateCreateCafe,validateUpdateCafe }
+export default { validateCreateCafe,validateUpdateCafe }
